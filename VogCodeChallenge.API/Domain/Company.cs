@@ -7,6 +7,7 @@ namespace VogCodeChallenge.API.Domain
 {
     public class Company : BaseEntity
     {
+        public string Name { get; set; }
         public List<Department> Departments { get; set; }
     }
 }
