@@ -84,9 +84,15 @@ namespace VogCodeChallenge.API.Services
             return allEmployees;
         }
 
-        public Employee Get(Guid id)
+        public IEnumerable<Employee> GetAllByDepartmentId(Guid departmentId)
         {
-            return allEmployees.Find(x => x.Id.Equals(id));
+            Department department = departments.Find(x => x.Id.Equals(departmentId));
+            return department != null ? department.Employees : Enumerable.Empty<Employee>();
+        }
+
+        public Employee GetByEmployeeId(Guid employeeId)
+        {
+            return allEmployees.Find(x => x.Id.Equals(employeeId));
         }
     }
 }

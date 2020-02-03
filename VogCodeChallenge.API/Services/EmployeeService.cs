@@ -25,9 +25,14 @@ namespace VogCodeChallenge.API.Services
             return employeeRepository.ListAll();
         }
 
-        public Employee Get(Guid id)
+        public IEnumerable<Employee> GetAllByDepartmentId(Guid departmentId)
         {
-            return employeeRepository.Get(id);
+            return employeeRepository.GetAllByDepartmentId(departmentId);
+        }
+
+        public Employee GetByEmployeeId(Guid employeeId)
+        {
+            return employeeRepository.GetByEmployeeId(employeeId);
         }
 
     }
