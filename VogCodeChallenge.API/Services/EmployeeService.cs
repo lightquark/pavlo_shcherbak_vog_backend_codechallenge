@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VogCodeChallenge.API.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace VogCodeChallenge.API.Services
 {
@@ -13,6 +14,7 @@ namespace VogCodeChallenge.API.Services
         public EmployeeService(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
+            InitData.PopulateRepository(employeeRepository);
         }
 
         public IEnumerable<Employee> GetAll()

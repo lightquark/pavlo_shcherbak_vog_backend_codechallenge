@@ -17,5 +17,9 @@ namespace VogCodeChallenge.API.Services
 
         // this method I added just to demonstrate how to get a specific employee by his ID
         Employee GetByEmployeeId(Guid employeeId);
+
+        void setEmployees(List<Employee> employees);
+        void setDepartments(List<Department> departments);
+        void setCompany(Company company);
     }
 }

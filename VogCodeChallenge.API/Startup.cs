@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using VogCodeChallenge.API.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace VogCodeChallenge.API
 {
@@ -28,8 +29,18 @@ namespace VogCodeChallenge.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            services.AddSingleton<EmployeeService, EmployeeService>();
+            bool DbEnabled = Configuration.GetValue<bool>("DbEnabled");
+            if (DbEnabled)
+            {
+                services.AddScoped<IEmployeeRepository, DbEmployeeRepository>();
+                services.AddDbContext<EmployeeDbContext>(options => options.UseInMemoryDatabase(databaseName: "EmployeesDb"));
+            }
+            else
+            {
+                services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            }
+
+            services.AddScoped<EmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
